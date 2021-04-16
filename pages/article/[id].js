@@ -7,11 +7,14 @@ import utilStyles from "../../styles/utils.module.scss";
 import axios from "axios";
 
 export default function Article(props) {
-    console.log(props)
-    const {data} = props
+  console.log(props);
+  const { data } = props;
   return (
     <Layout>
       <Head>
+        <meta name="description" content={data.body} />
+        <meta name="og:title" content={data.title} />
+
         <title>{data.title}</title>
       </Head>
       <article>
@@ -29,7 +32,7 @@ export async function getStaticPaths() {
   const paths = articles.map((article) => {
     return { params: { id: article.id.toString() } };
   });
-  console.log(paths )
+  console.log(paths);
   return { paths, fallback: false };
 }
 export async function getStaticProps({ params }) {
